@@ -18,6 +18,10 @@
 
         public string Utelnum { get; set; }
 
+        public string uQuestion { get; set; }
+
+        public string uAnswer { get; set; }
+
 
 
 

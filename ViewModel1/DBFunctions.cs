@@ -20,7 +20,7 @@ namespace ViewModel1
         {
 
             conObj = new OleDbConnection();
-            cmd = conObj.CreateCommand();
+            cmd = conObj.CreateCommand();//was eCommand and not CreatCommand if something breaks replace.
         }
 
         public OleDbCommand GenerateOleDBCommand(string sqlStr, string dbFileName)

@@ -35,7 +35,7 @@ namespace ViewModel
             try
             {
 
-                cmd = GenerateOleDBCommand(sqlStr, "GardeningDB.accdb");
+                cmd = GenerateOleDBCommand(sqlStr, "GardeningApp_Data/DB.accdb");
                 conObj.Open();
                 reader = cmd.ExecuteReader();
                 while (reader.Read())

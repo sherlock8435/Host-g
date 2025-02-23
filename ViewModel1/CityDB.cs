@@ -23,7 +23,7 @@ namespace ViewModel1
             {
 
                 string sqlStr = "Select * From CityTbl";
-                cmd = GenerateOleDBCommand(sqlStr, "MyDBase.accdb");
+                cmd = GenerateOleDBCommand(sqlStr, "App_Data/DB.accdb");
                 conObj.Open();
                 reader = cmd.ExecuteReader();
                 while (reader.Read())

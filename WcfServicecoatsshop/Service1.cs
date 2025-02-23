@@ -13,8 +13,8 @@ namespace WcfServicecoatsshop
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class Service1 : IService1
     {
-        ItemDB Idb=new ItemDB();
-        CityDB Cdb=new CityDB();
+        ItemDB Idb = new ItemDB();
+        CityDB Cdb = new CityDB();
         OrdersDB Odb = new OrdersDB();
         UserDB Udb = new UserDB();
         Mailboxdb Mdb = new Mailboxdb();
@@ -22,7 +22,7 @@ namespace WcfServicecoatsshop
 
         public CityList SelectAllCities()
         {
-           return Cdb.SelectAllCities();
+            return Cdb.SelectAllCities();
         }
 
 
@@ -81,7 +81,7 @@ namespace WcfServicecoatsshop
         }
         public int AddOrder(Order od)
         {
-            return Odb.AddOrder(od);   
+            return Odb.AddOrder(od);
         }
         public OrderList SelectOrdersByOrderDate(string uEmail, string orderDate)
         {
@@ -99,6 +99,10 @@ namespace WcfServicecoatsshop
         {
             return Udb.SeletAllUsers();
         }
+        public int AddUser(User user)
+        {
+            return Udb.AddUser(user);
+        }
         public String SelectUserIDByEmail(string UserEmail)
         {
             return Udb.SelectUserIDByEmail(UserEmail);
@@ -111,6 +115,22 @@ namespace WcfServicecoatsshop
         {
             return Udb.CheckAdminExist(uPass, uEmail);
         }
+        public bool CheckUserExistByEmail(string uEmail)
+        {
+            return Udb.CheckUserExistByEmail(uEmail);
+        }
+        public string GetQuestion(string uEmail)
+        {
+            return Udb.GetQuestion(uEmail);
+        }
+        public string PassRecovery(string uEmail, string uAnswer)
+        {
+            return Udb.PassRecovery(uEmail, uAnswer);
+        }
+        public User GetUserByEmail(string uEmail)
+        {
+            return Udb.GetUserByEmail(uEmail);
+        }
         public int UpdateUserProfile(User usr)
         {
             return Udb.UpdateUserProfile(usr);
@@ -120,9 +140,8 @@ namespace WcfServicecoatsshop
             return Udb.CountUsers();
         }
         public MailBoxList SelectAllMsg()
-        { 
-        return Mdb.SelectAllMsg();
+        {
+            return Mdb.SelectAllMsg();
         }
-
     }
 }

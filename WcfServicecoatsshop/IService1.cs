@@ -13,17 +13,15 @@ namespace WcfServicecoatsshop
     [ServiceContract]
     public interface IService1
     {
-        
+
 
         [OperationContract]
         CityList SelectAllCities();
 
         [OperationContract]
-
         Cities SelectCityByName(string cityName);
 
         [OperationContract]
-
         Cities SelectCityById(int id);
         [OperationContract]
         List<Cities> OrderByName();
@@ -54,17 +52,28 @@ namespace WcfServicecoatsshop
         [OperationContract]
         UserList SeletAllUsers();
         [OperationContract]
+        int AddUser(User user);
+        [OperationContract]
         String SelectUserIDByEmail(string UserEmail);
         [OperationContract]
         bool CheckUserExist(string uPass, string uEmail);
         [OperationContract]
         bool CheckAdminExist(string uPass, string uEmail);
         [OperationContract]
+        string GetQuestion(string uEmail);
+        [OperationContract]
+        string PassRecovery(string uEmail, string uAnswer);
+        [OperationContract]
+        User GetUserByEmail(string uEmail);
+        [OperationContract]
+        bool CheckUserExistByEmail(string uEmail);
+        [OperationContract]
         int UpdateUserProfile(User usr);
         [OperationContract]
         int CountUsers();
         [OperationContract]
         MailBoxList SelectAllMsg();
+
 
         // TODO: Add your service operations here
     }
