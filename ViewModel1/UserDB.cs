@@ -114,7 +114,7 @@ namespace ViewModel1
         public bool CheckUserExist(string uPass, string uEmail)
         {
             DataTable dt = null;
-            string sqlStr = $"select * from UsersTbl where UserEmail=' {uEmail}'  and UserPass=  '{uPass} '";
+            string sqlStr = $"select * from UsersTbl where UserEmail='{uEmail}'  and UserPass=  '{uPass} '";
             dt = dbf.Select(sqlStr, "App_Data/DB.accdb");
             if (dt != null)
                 return false;
@@ -125,8 +125,8 @@ namespace ViewModel1
         {
 
             DataTable dt = null;
-            string sqlStr = $"select * from UsersTbl where UserEmail=' {uEmail}'";
-            dt = dbf.Select(sqlStr, "App_Data/DB.accdb");
+            string sqlStr = $"select * from UsersTbl where UserEmail='{uEmail}'";
+            dt = dbf.Select(sqlStr, "DB.accdb");
             if (dt != null)
                 return false;
             return true;

@@ -20,7 +20,7 @@ namespace ViewModel1
         {
 
             conObj = new OleDbConnection();
-            cmd = conObj.CreateCommand();//was eCommand and not CreatCommand if something breaks replace.
+            cmd = new OleDbCommand();
         }
 
         public OleDbCommand GenerateOleDBCommand(string sqlStr, string dbFileName)
@@ -28,8 +28,6 @@ namespace ViewModel1
             conObj = GenerateConnection(dbFileName);
             cmd = new OleDbCommand(sqlStr, conObj);
             return cmd;
-
-
         }
 
         private string path()
@@ -49,27 +47,18 @@ namespace ViewModel1
             {
 
                 if (dbFileName.Contains(".mdb"))
-                    conObj.ConnectionString = "Provider=Microsoft.jet.OLEDB.4.0;Data Source=Path()" + path() + "\\App_Data\\" + dbFileName;
+                    conObj.ConnectionString = "Provider=Microsoft.jet.OLEDB.4.0;Data Source=" + path() + "\\App_Data\\" + dbFileName;
 
                 else
-                    conObj.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Path()" + path() + "\\App_Data\\" + dbFileName;
+                    conObj.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + path() + "\\App_Data\\" + dbFileName;
 
                 conObj.Open();
-
-
-
-
-
-
-
-
 
             }
             catch (Exception ex)
             {
 
                 System.Diagnostics.Debug.WriteLine(ex.Message);
-
 
             }
             finally
