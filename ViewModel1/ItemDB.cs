@@ -33,7 +33,7 @@ namespace ViewModel1
             try
             {
 
-                cmd = GenerateOleDBCommand(sqlStr, "App_Data/DB.accdb");
+                cmd = GenerateOleDBCommand(sqlStr, "DB.accdb");
                 conObj.Open();
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -99,7 +99,7 @@ namespace ViewModel1
         {
 
             string insertSql = string.Format("insert into ItemsTbl" + "(ItemCode,Name,Price,ItemImg,Quantity,Description,Category)" + "values({0},'{1}','{2}','{3}',{4},'{5}','{6}',{7})", item.Name, item.Price, item.Description, item.Quantity, item.ItemCode, item.Category, item.ItemImg);
-            return TmDB.ChangeTable(insertSql, "App_Data/DB.accdb");
+            return TmDB.ChangeTable(insertSql, "DB.accdb");
 
 
         }
@@ -108,14 +108,14 @@ namespace ViewModel1
         {
 
             string updateSql = string.Format("update ItemsTbl SET" + "',Name='" + item.Name + "',Category='" + item.Category + "',Description='" + item.Description + "',ItemCode='" + item.ItemCode + "',Price='" + item.Price + "',ItemImg='" + item.ItemImg + "',Quantity='" + item.Quantity);
-            return TmDB.ChangeTable(updateSql, "App_Data/DB.accdb");
+            return TmDB.ChangeTable(updateSql, "DB.accdb");
 
         }
 
         public int DeleteItem(Item item)
         {
             string delSql = string.Format("Delete from ItemsTbl" + "where ItemCode=" + item.ItemCode);
-            return TmDB.ChangeTable(delSql, "App_Data/DB.accdb");
+            return TmDB.ChangeTable(delSql, "DB.accdb");
         }
     }
 }

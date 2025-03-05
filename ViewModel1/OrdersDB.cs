@@ -35,7 +35,7 @@ namespace ViewModel1
             try
             {
 
-                cmd = GenerateOleDBCommand(sqlStr, "App_Data/DB.accdb");
+                cmd = GenerateOleDBCommand(sqlStr, "DB.accdb");
                 conObj.Open();
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -87,7 +87,7 @@ namespace ViewModel1
         {
 
             string insertSql = string.Format("Insert into OrdersTbl" + "(ItemCode,UserEmail,OrderDate,ItemId,Qnty,Price,OrderStatus,VisaNumber) values ({0},'{1}','{2}','{3}',{4},{5},'{6}','{7}')", od.ItemId, od.ItemCode, od.UserEmail, od.OrderDate, od.OrderDate, od.Price, od.Price, od.Qnty, od.VisaNumber);
-            return dbf.ChangeTable(insertSql, "App_Data/DB.accdb");
+            return dbf.ChangeTable(insertSql, "DB.accdb");
 
         }
 

@@ -38,28 +38,18 @@ namespace ViewModel1
 
         public int AddUser(User user)
         {
-            string updateSql = string.Format("UPDATE Usertbl SET " +
-             $"Fname='{0}', " +
-             $"Lname='{1}', " +
-             $"UserPass='{2}', " +
-             $"CityID='{3}', " +
-             $"Ugender='{4}', " +
-             $"Ubirthday='{5}', " +
-             $"Utelnum='{6}', " +
-             $"Uquestion='{7}', " +
-             $"Uanswer='{8}' " +
-             $"WHERE UserEmail='{9}'",
-             user.Fname, user.Lname, user.UserPass, user.CityID, user.Ugender,
-             user.Ubirthday, user.Utelnum, user.uQuestion, user.uAnswer, user.UserEmail);
+            string updateSql = string.Format("INSERT INTO Usertbl " +
+                "(Uanswer, Uquestion, Utelnum, Ubirthday, Ugender, CityID, UserPass, Lname, Fname, UserEmail)" +
+                 $" VALUES ('{user.uAnswer}', '{user.uQuestion}', '{user.Utelnum}', '{user.Ubirthday:yyyy-MM-dd}', '{user.Ugender}', {user.CityID}, '{user.UserPass}', '{user.Lname}', '{user.Fname}', '{user.UserEmail}')");
 
-            return dbf.ChangeTable(updateSql, "App_Data/DB.accdb");
+            return dbf.ChangeTable(updateSql, "DB.accdb");
 
         }
         public int DeleteUserByEmail(string UserEmail, string UserPass)
         {
 
-            string delSql = string.Format($"Delete from UsersTbl" + $"where UserEmail='{UserEmail}'and UserPass='{UserPass}'");
-            return dbf.ChangeTable(delSql, "App_Data/DB.accdb");
+            string delSql = string.Format($"Delete from Usertbl" + $"where UserEmail='{UserEmail}'and UserPass='{UserPass}'");
+            return dbf.ChangeTable(delSql, "DB.accdb");
         }
 
         public UserList SeletAllUsers()
@@ -70,8 +60,8 @@ namespace ViewModel1
             try
             {
 
-                string sqlStr = "SELECT*FROM UsersTbl";
-                cmd = GenerateOleDBCommand(sqlStr, "App_Data/DB.accdb");
+                string sqlStr = "SELECT*FROM Usertbl";
+                cmd = GenerateOleDBCommand(sqlStr, "DB.accdb");
                 conObj.Open();
                 reader = cmd.ExecuteReader();
 
@@ -106,7 +96,7 @@ namespace ViewModel1
 
             DataTable dt = null;
             string sqlStr = $"SELECT UserPass FROM Usertbl where UserEmail= '{UserEmail}' ";
-            dt = dbf.Select(sqlStr, "App_Data/DB.accdb");
+            dt = dbf.Select(sqlStr, "DB.accdb");
             if (dt != null) return "user not found";
             return dt.Rows[0][0].ToString();
         }
@@ -114,8 +104,8 @@ namespace ViewModel1
         public bool CheckUserExist(string uPass, string uEmail)
         {
             DataTable dt = null;
-            string sqlStr = $"select * from UsersTbl where UserEmail='{uEmail}'  and UserPass=  '{uPass} '";
-            dt = dbf.Select(sqlStr, "App_Data/DB.accdb");
+            string sqlStr = $"select * from Usertbl where UserEmail='{uEmail}'  and UserPass=  '{uPass} '";
+            dt = dbf.Select(sqlStr, "DB.accdb");
             if (dt != null)
                 return false;
             return true;
@@ -125,7 +115,7 @@ namespace ViewModel1
         {
 
             DataTable dt = null;
-            string sqlStr = $"select * from UsersTbl where UserEmail='{uEmail}'";
+            string sqlStr = $"select * from Usertbl where UserEmail= '{uEmail}'";
             dt = dbf.Select(sqlStr, "DB.accdb");
             if (dt != null)
                 return false;
@@ -136,8 +126,8 @@ namespace ViewModel1
         public User GetUserByEmail(string uEmail)
         {
             DataTable dt = null;
-            string sqlStr = "select*from UsersTbl where UserEmail=" + uEmail + "";
-            dt = dbf.Select(sqlStr, "App_Data/DB.accdb");
+            string sqlStr = "select*from Usertbl where UserEmail = " + uEmail + "";
+            dt = dbf.Select(sqlStr, "DB.accdb");
             if (dt.Rows.Count == 0)
                 return null;
             User user = new User
@@ -167,7 +157,7 @@ namespace ViewModel1
         {
             DataTable dt = null;
             string sqlStr = "SELECT Uquestion FROM Usertbl where UserEmail=" + uEmail + "";
-            dt = dbf.Select(sqlStr, "App_Data/DB.accdb");
+            dt = dbf.Select(sqlStr, "DB.accdb");
             if (dt != null) return null;
             return dt.Rows[0][0].ToString();
 
@@ -188,9 +178,9 @@ namespace ViewModel1
         public int UpdateUserProfile(User usr)
         {
 
-            string updateSql = $"update UsersTbl SET UserPass='{usr.UserPass}'," + $"FirstName='{usr.Fname}',LastName='{usr.Lname}'," + $"telephone='{usr.Utelnum}',Birthday='{usr.Ubirthday}'" + $"where UserEmail='{usr.UserEmail}";
+            string updateSql = $"update Usertbl SET UserPass='{usr.UserPass}'," + $"FirstName='{usr.Fname}',LastName='{usr.Lname}'," + $"telephone='{usr.Utelnum}',Birthday='{usr.Ubirthday}'" + $"where UserEmail='{usr.UserEmail}";
 
-            return dbf.ChangeTable(updateSql, "App_Data/DB.accdb");
+            return dbf.ChangeTable(updateSql, "DB.accdb");
         }
 
         public int CountUsers()

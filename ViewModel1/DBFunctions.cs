@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using System.Data.OleDb;
-using System.IO;
 
 namespace ViewModel1
 {
@@ -46,11 +41,11 @@ namespace ViewModel1
             try
             {
 
-                if (dbFileName.Contains(".mdb"))
-                    conObj.ConnectionString = "Provider=Microsoft.jet.OLEDB.4.0;Data Source=" + path() + "\\App_Data\\" + dbFileName;
+                //if (dbFileName.Contains(".mdb"))
+                //    conObj.ConnectionString = "Provider=Microsoft.jet.OLEDB.4.0;Data Source=" + path() + "\\App_Data\\" + dbFileName;
 
-                else
-                    conObj.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + path() + "\\App_Data\\" + dbFileName;
+                //else
+                conObj.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + path() + "1" + "\\App_Data\\" + dbFileName;
 
                 conObj.Open();
 
@@ -102,7 +97,7 @@ namespace ViewModel1
             return dt;
         }
 
-        public int ChangeTable(string dbFileName, string sqlString)
+        public int ChangeTable(string sqlString, string dbFileName)
         {
 
             int records = 0;
@@ -132,23 +127,23 @@ namespace ViewModel1
             return records;
         }
 
-        public bool CheckAdmin(string Email_,string Password_)
+        public bool CheckAdmin(string Email_, string Password_)
         {
 
             string strPass = "", id_ = "";
             DataSet ds = new DataSet();
             string strPath = path() + "\\App_Data\\XMLloginFile.xml";
-              
+
             ds.ReadXml(strPath);
             DataTable dt = ds.Tables[0];
-            if(dt != null )
-                if(dt.Rows.Count > 0)
-                    for(int i = 0; i < dt.Rows.Count; i++)
+            if (dt != null)
+                if (dt.Rows.Count > 0)
+                    for (int i = 0; i < dt.Rows.Count; i++)
                     {
 
-                        id_=dt.Rows[i]["name"].ToString();
+                        id_ = dt.Rows[i]["name"].ToString();
                         strPass = dt.Rows[i]["Password"].ToString();
-                        if(strPass==Password_&&Email_==id_)
+                        if (strPass == Password_ && Email_ == id_)
                             return true;
                     }
 
@@ -159,17 +154,17 @@ namespace ViewModel1
 
 
         }
-    
-
-            
 
 
-        
-           
+
+
+
+
+
 
 
 
     }
-    }
+}
 
 
