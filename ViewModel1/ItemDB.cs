@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Diagnostics;
 using Model;
 
@@ -78,6 +79,24 @@ namespace ViewModel1
             Item c = list.Find(item => item.Name == ItemName);
             return c;
         }
+        public Item SelectItemByID(int ItemID)
+        {
+
+            string sqlStr = "Select*From ItemsTbl where ItemCode= '" + ItemID + "'";
+            DataTable dt = TmDB.Select(sqlStr, "DB.accdb");
+            Item item = new Item
+            {
+                ItemCode = int.Parse(dt.Rows[0]["ItemCode"].ToString()),
+                Name = dt.Rows[0]["Name"].ToString(),
+                Price = int.Parse(dt.Rows[0]["Price"].ToString()),
+                ItemImg = dt.Rows[0]["ItemImg"].ToString(),
+                Quantity = int.Parse(dt.Rows[0]["Quantity"].ToString()),
+                Description = dt.Rows[0]["Description"].ToString(),
+                Category = dt.Rows[0]["Category"].ToString()
+            }; 
+            return item;
+
+        }
 
         public ItemList SelectItemListByCategory(string CategoryName)
         {
@@ -116,6 +135,14 @@ namespace ViewModel1
         {
             string delSql = string.Format("Delete from ItemsTbl" + "where ItemCode=" + item.ItemCode);
             return TmDB.ChangeTable(delSql, "DB.accdb");
+        }
+
+        public DataTable GetItems()
+        {
+            DataTable dt = new DataTable();
+            string sqlStr = "Select * From ItemsTbl";
+            dt = TmDB.Select(sqlStr, "DB.accdb");
+            return dt;
         }
     }
 }

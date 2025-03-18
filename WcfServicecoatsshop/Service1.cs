@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -74,7 +75,13 @@ namespace WcfServicecoatsshop
         {
             return Idb.DeleteItem(item);
         }
-
+        public DataTable GetItems()
+        {
+            return Idb.GetItems();
+        }
+        public Item SelectItemByID(int ItemID) { 
+        return Idb.SelectItemByID(ItemID);
+        }
         public OrderList SelectAllOrders(string uEmail)
         {
             return Odb.SelectAllOrders(uEmail);

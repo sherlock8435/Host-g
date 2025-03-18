@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -40,6 +41,11 @@ namespace WcfServicecoatsshop
         [OperationContract]
         int DeleteItem(Item item);
         [OperationContract]
+        DataTable GetItems();
+        [OperationContract]
+        Item SelectItemByID(int ItemID);
+        [OperationContract]
+
         OrderList SelectAllOrders(string uEmail);
         [OperationContract]
         int AddOrder(Order od);
