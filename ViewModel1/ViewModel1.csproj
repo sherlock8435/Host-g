@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CartDB.cs" />
     <Compile Include="CityDB.cs" />
     <Compile Include="DBFunctions.cs" />
     <Compile Include="ItemDB.cs" />

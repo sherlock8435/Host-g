@@ -21,14 +21,6 @@ namespace Model
 
                 return this.OrderBy(item => item.CityName).ToList();
             return null;
-
-
-
-
-
-
-
-
         }
     }
 }

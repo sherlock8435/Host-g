@@ -29,16 +29,19 @@ namespace ViewModel1
 			usr.UserEmail = reader["userEmail"].ToString();
 			usr.Ubirthday = reader["birthDay"].ToString();
 			usr.Ugender = reader["Gender"].ToString();
-			usr.uQuestion = reader["Question"].ToString();
-			usr.uAnswer = reader["Answer"].ToString();
-			return usr;
+			usr.Uquestion = reader["Question"].ToString();
+			usr.Uanswer = reader["Answer"].ToString();
+			usr.CartID = reader["CartID"].ToString();
+
+            return usr;
 		}
 
 		public int AddUser(User user)
 		{
 			string updateSql = string.Format("INSERT INTO Usertbl " +
-				"(Uanswer, Uquestion, Utelnum, Ubirthday, Ugender, CityID, UserPass, Lname, Fname, UserEmail)" +
-				 $" VALUES ('{user.uAnswer}', '{user.uQuestion}', '{user.Utelnum}', '{user.Ubirthday:yyyy-MM-dd}', '{user.Ugender}', {user.CityID}, '{user.UserPass}', '{user.Lname}', '{user.Fname}', '{user.UserEmail}')");
+                "(Uanswer, Uquestion, Utelnum, Ubirthday, Ugender, CityID, UserPass, Lname, Fname, UserEmail, CartID)" +
+				 $" VALUES ('{user.Uanswer}', '{user.Uquestion}', '{user.Utelnum}', '{user.Ubirthday:yyyy-MM-dd}', '{user.Ugender}', {user.CityID}, " +
+				 $"'{user.UserPass}', '{user.Lname}', '{user.Fname}', '{user.UserEmail}', {user.CartID})");
 
 			return dbf.ChangeTable(updateSql, "DB.accdb");
 
@@ -144,8 +147,9 @@ namespace ViewModel1
 					Ugender = dt.Rows[0]["Ugender"].ToString(),
 					Ubirthday = dt.Rows[0]["Ubirthday"].ToString(),
 					Utelnum = dt.Rows[0]["Utelnum"].ToString(),
-					uQuestion = dt.Rows[0]["Uquestion"].ToString(),
-					uAnswer = dt.Rows[0]["Uanswer"].ToString()
+					Uquestion = dt.Rows[0]["Uquestion"].ToString(),
+					Uanswer = dt.Rows[0]["Uanswer"].ToString(),
+					CartID = dt.Rows[0]["CartID"].ToString()
 				};
 				return user;
 			}
@@ -174,7 +178,7 @@ namespace ViewModel1
 			if (CheckUserExistByEmail(uEmail))
 			{
 				User user = GetUserByEmail(uEmail);
-				string answer = user.uAnswer;
+				string answer = user.Uanswer;
 
 				if (answer.Equals(uAnswer))
 					return user.UserPass;
@@ -187,7 +191,7 @@ namespace ViewModel1
 		public int UpdateUserProfile(User usr)
 		{
 
-			string updateSql = $"update Usertbl SET UserPass='{usr.UserPass}'," + $"FirstName='{usr.Fname}',LastName='{usr.Lname}'," + $"telephone='{usr.Utelnum}',Birthday='{usr.Ubirthday}'" + $"where UserEmail='{usr.UserEmail}";
+			string updateSql = $"update Usertbl SET UserPass='{usr.UserPass}', FirstName='{usr.Fname}',LastName='{usr.Lname}',telephone='{usr.Utelnum}',Birthday='{usr.Ubirthday}' where UserEmail='{usr.UserEmail}";
 
 			return dbf.ChangeTable(updateSql, "DB.accdb");
 		}

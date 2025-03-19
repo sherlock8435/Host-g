@@ -10,23 +10,17 @@ namespace ViewModel1
     public class OrdersDB : DBFunctions
     {
         private OrderList list = new OrderList();
-        DBFunctions dbf = new DBFunctions();
+        readonly DBFunctions dbf = new DBFunctions();
 
 
         private Order CreateModel(Order order)
         {
-
             order.UserEmail = reader["UserEmail"].ToString();
-            order.ItemId = int.Parse(reader["ItemId"].ToString());
-            order.ItemCode = int.Parse(reader["ItemCode"].ToString());
-            order.OrderStatus = reader["OrderStatus"].ToString();
+            order.CartID = int.Parse(reader["CartID"].ToString());
             order.OrderDate = reader["OrderDate"].ToString();
-            order.Qnty = int.Parse(reader["Qnty"].ToString());
             order.Price = int.Parse(reader["price"].ToString());
             order.VisaNumber = reader["VisaNumber"].ToString();
             return order;
-
-
         }
 
         private OrderList SelectOrders(string sqlStr)
@@ -62,8 +56,7 @@ namespace ViewModel1
             finally
             {
 
-                if (reader != null)
-                    reader.Close();
+                reader?.Close();
                 if (this.conObj.State == System.Data.ConnectionState.Open)
                     this.conObj.Close();
 
@@ -85,10 +78,9 @@ namespace ViewModel1
 
         public int AddOrder(Order od)
         {
-
-            string insertSql = string.Format("Insert into OrdersTbl" + "(ItemCode,UserEmail,OrderDate,ItemId,Qnty,Price,OrderStatus,VisaNumber) values ({0},'{1}','{2}','{3}',{4},{5},'{6}','{7}')", od.ItemId, od.ItemCode, od.UserEmail, od.OrderDate, od.OrderDate, od.Price, od.Price, od.Qnty, od.VisaNumber);
+            string insertSql = $"Insert into OrderTbl (CartID,UserEmail,OrderDate,Price,VisaNumber) values" +
+                $" ({od.CartID},'{od.UserEmail}','{od.OrderDate}',{od.Price},'{od.VisaNumber}')";
             return dbf.ChangeTable(insertSql, "DB.accdb");
-
         }
 
         public OrderList SelectOrdersByOrderDate(string uEmail, string orderDate)
@@ -101,9 +93,9 @@ namespace ViewModel1
         public Order SelectOneOrder(string uEmail, string orderDate, int ItemCode)
         {
 
-            string SqlStr = string.Format("Select*From OrdersTbl where userEmail='" + uEmail + "'and OrderDate'" + orderDate + "'and ItemCode='" + ItemCode);
+            string SqlStr = string.Format("Select*From OrdersTbl where userEmail='" + uEmail + "'and OrderDate'" + orderDate + "'and CartID='" + ItemCode);
             list = SelectOrders(SqlStr);
-            Order order = list.Find(item => item.ItemCode == ItemCode && item.OrderDate == orderDate);
+            Order order = list.Find(item => item.CartID == ItemCode && item.OrderDate == orderDate);
             return order;
 
 

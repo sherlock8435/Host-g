@@ -15,13 +15,22 @@ namespace WcfServicecoatsshop
     public interface IService1
     {
 
-
+        [OperationContract]
+        int AddToCart(Cart c);
+        [OperationContract]
+        int UpdateCart(Cart c);
+        [OperationContract]
+        int DeleteCart(Cart c);
+        [OperationContract]
+        CartList SelectAllCarts();
+        [OperationContract]
+        Cart SelectCartByEmail(string email);
+        [OperationContract]
+        Item[] GetCartItems(string email);
         [OperationContract]
         CityList SelectAllCities();
-
         [OperationContract]
         Cities SelectCityByName(string cityName);
-
         [OperationContract]
         Cities SelectCityById(int id);
         [OperationContract]
@@ -45,7 +54,8 @@ namespace WcfServicecoatsshop
         [OperationContract]
         Item SelectItemByID(int ItemID);
         [OperationContract]
-
+        int ItemAmount();
+        [OperationContract]
         OrderList SelectAllOrders(string uEmail);
         [OperationContract]
         int AddOrder(Order od);

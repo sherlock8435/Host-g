@@ -18,15 +18,11 @@
 
         public string Utelnum { get; set; }
 
-        public string uQuestion { get; set; }
+        public string Uquestion { get; set; }
 
-        public string uAnswer { get; set; }
+        public string Uanswer { get; set; }
 
-
-
-
-
-
+        public string CartID { get; set; }
 
     }
 }

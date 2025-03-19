@@ -9,13 +9,13 @@ namespace ViewModel1
     {
 
         private ItemList list = new ItemList();
-        DBFunctions TmDB = new DBFunctions();
+        readonly DBFunctions TmDB = new DBFunctions();
 
 
         private Item CreateModel(Item i)
         {
 
-            i.ItemCode = (int)reader["ItemCode"];
+            i.ItemID = (int)reader["CartID"];
             i.Name = reader["Name"].ToString();
             i.Price = int.Parse(reader["Price"].ToString());
             i.Description = reader["Description"].ToString();
@@ -52,8 +52,7 @@ namespace ViewModel1
             finally
             {
 
-                if (reader != null)
-                    reader.Close();
+                reader?.Close();
                 if (this.conObj.State == System.Data.ConnectionState.Open)
                     this.conObj.Close();
 
@@ -68,7 +67,6 @@ namespace ViewModel1
             list = GetItemList(sqlStr);
             return list;
 
-
         }
 
         public Item SelectItemByName(string ItemName)
@@ -82,18 +80,18 @@ namespace ViewModel1
         public Item SelectItemByID(int ItemID)
         {
 
-            string sqlStr = "Select*From ItemsTbl where ItemCode= '" + ItemID + "'";
+            string sqlStr = $"Select*From ItemsTbl where ItemID= {ItemID}";
             DataTable dt = TmDB.Select(sqlStr, "DB.accdb");
             Item item = new Item
             {
-                ItemCode = int.Parse(dt.Rows[0]["ItemCode"].ToString()),
+                ItemID = int.Parse(dt.Rows[0]["ItemID"].ToString()),
                 Name = dt.Rows[0]["Name"].ToString(),
                 Price = int.Parse(dt.Rows[0]["Price"].ToString()),
                 ItemImg = dt.Rows[0]["ItemImg"].ToString(),
                 Quantity = int.Parse(dt.Rows[0]["Quantity"].ToString()),
                 Description = dt.Rows[0]["Description"].ToString(),
                 Category = dt.Rows[0]["Category"].ToString()
-            }; 
+            };
             return item;
 
         }
@@ -117,7 +115,7 @@ namespace ViewModel1
         public int AddItem(Item item)
         {
 
-            string insertSql = string.Format("insert into ItemsTbl" + "(ItemCode,Name,Price,ItemImg,Quantity,Description,Category)" + "values({0},'{1}','{2}','{3}',{4},'{5}','{6}',{7})", item.Name, item.Price, item.Description, item.Quantity, item.ItemCode, item.Category, item.ItemImg);
+            string insertSql = string.Format("insert into ItemsTbl" + "(CartID,Name,Price,ItemImg,Quantity,Description,Category)" + "values({0},'{1}','{2}','{3}',{4},'{5}','{6}',{7})", item.Name, item.Price, item.Description, item.Quantity, item.ItemID, item.Category, item.ItemImg);
             return TmDB.ChangeTable(insertSql, "DB.accdb");
 
 
@@ -126,23 +124,31 @@ namespace ViewModel1
         public int UpdateItem(Item item)
         {
 
-            string updateSql = string.Format("update ItemsTbl SET" + "',Name='" + item.Name + "',Category='" + item.Category + "',Description='" + item.Description + "',ItemCode='" + item.ItemCode + "',Price='" + item.Price + "',ItemImg='" + item.ItemImg + "',Quantity='" + item.Quantity);
+            string updateSql = string.Format("update ItemsTbl SET" + "',Name='" + item.Name + "',Category='" + item.Category + "',Description='" + item.Description + "',CartID='" + item.ItemID + "',Price='" + item.Price + "',ItemImg='" + item.ItemImg + "',Quantity='" + item.Quantity);
             return TmDB.ChangeTable(updateSql, "DB.accdb");
 
         }
 
         public int DeleteItem(Item item)
         {
-            string delSql = string.Format("Delete from ItemsTbl" + "where ItemCode=" + item.ItemCode);
+            string delSql = string.Format("Delete from ItemsTbl" + "where CartID=" + item.ItemID);
             return TmDB.ChangeTable(delSql, "DB.accdb");
         }
 
         public DataTable GetItems()
         {
-            DataTable dt = new DataTable();
             string sqlStr = "Select * From ItemsTbl";
-            dt = TmDB.Select(sqlStr, "DB.accdb");
+            DataTable dt = TmDB.Select(sqlStr, "DB.accdb");
             return dt;
         }
+        public int ItemAmount()
+        {
+            string sqlStr = "Select * From ItemsTbl";
+            int amount = TmDB.Select(sqlStr, "DB.accdb").Rows.Count;
+            return amount;
+        }
+
+
+
     }
 }

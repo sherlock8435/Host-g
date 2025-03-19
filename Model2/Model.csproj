@@ -42,11 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminList.cs" />
+    <Compile Include="CartList.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="CategoryList.cs" />
     <Compile Include="Cities.cs" />
     <Compile Include="Admin.cs" />
     <Compile Include="CityList.cs" />
+    <Compile Include="Cart.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemList.cs" />
     <Compile Include="MailBox.cs" />

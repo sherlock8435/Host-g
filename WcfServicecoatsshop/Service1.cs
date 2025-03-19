@@ -14,19 +14,41 @@ namespace WcfServicecoatsshop
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class Service1 : IService1
     {
-        ItemDB Idb = new ItemDB();
-        CityDB Cdb = new CityDB();
-        OrdersDB Odb = new OrdersDB();
-        UserDB Udb = new UserDB();
-        Mailboxdb Mdb = new Mailboxdb();
+        readonly ItemDB Idb = new ItemDB();
+        readonly CityDB Cdb = new CityDB();
+        readonly OrdersDB Odb = new OrdersDB();
+        readonly UserDB Udb = new UserDB();
+        readonly Mailboxdb Mdb = new Mailboxdb();
+        readonly CartDB CartDB = new CartDB();
 
-
+        public int AddToCart(Cart c)
+        {
+            return CartDB.AddToCart(c);
+        }
+        public int UpdateCart(Cart c)
+        {
+            return CartDB.UpdateCart(c);
+        }
+        public int DeleteCart(Cart c)
+        {
+            return CartDB.DeleteCart(c);
+        }
+        public CartList SelectAllCarts()
+        {
+            return CartDB.SelectAllCarts();
+        }
+        public Cart SelectCartByEmail(string email)
+        {
+            return CartDB.SelectCartByEmail(email);
+        }
+        public Item[] GetCartItems(string email)
+        {
+            return CartDB.GetCartItems(email);
+        }
         public CityList SelectAllCities()
         {
             return Cdb.SelectAllCities();
         }
-
-
         public Cities SelectCityByName(string cityName)
         {
 
@@ -79,8 +101,13 @@ namespace WcfServicecoatsshop
         {
             return Idb.GetItems();
         }
-        public Item SelectItemByID(int ItemID) { 
-        return Idb.SelectItemByID(ItemID);
+        public Item SelectItemByID(int ItemID)
+        {
+            return Idb.SelectItemByID(ItemID);
+        }
+        public int ItemAmount()
+        {
+            return Idb.ItemAmount();
         }
         public OrderList SelectAllOrders(string uEmail)
         {
