@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Xml.Linq;
 using Model;
 using ViewModel;
 using ViewModel1;
@@ -20,7 +21,7 @@ namespace WcfServicecoatsshop
         readonly UserDB Udb = new UserDB();
         readonly Mailboxdb Mdb = new Mailboxdb();
         readonly CartDB CartDB = new CartDB();
-
+        readonly CategoryDB Catdb = new CategoryDB();
         public int AddToCart(Cart c)
         {
             return CartDB.AddToCart(c);
@@ -44,6 +45,14 @@ namespace WcfServicecoatsshop
         public Item[] GetCartItems(string email)
         {
             return CartDB.GetCartItems(email);
+        }
+        public int GetTotalPrice(string email)
+        {
+            return CartDB.GetTotalPrice(email);
+        }
+        public int AddItemToCart(string email, Item item)
+        {
+            return CartDB.AddItemToCart(email, item);
         }
         public CityList SelectAllCities()
         {
@@ -177,5 +186,43 @@ namespace WcfServicecoatsshop
         {
             return Mdb.SelectAllMsg();
         }
+
+        public MailBoxList SelectMsgByEmail(string email)
+        {
+            return Mdb.SelectMsgByEmail(email);
+        }
+
+        public int AddMassage(MailBox m)
+        {
+            return Mdb.AddMassage(m);
+        }
+        public CategoryList SelectAllCategories()
+        {
+
+            return Catdb.SelectAllCategories();
+        }
+        public Category SelectCategoryByName(string catName)
+        {
+            return Catdb.SelectCategoryByName(catName);
+        }
+        public DataTable GetCategories()
+        {
+            return Catdb.GetCategories();
+        }
+
+        public int AddCategory(Category cat)
+        {
+            return Catdb.AddCategory(cat);
+        }
+        public int UpdateCategory(int ID, string name)
+        {
+            return Catdb.UpdateCategory(ID,name);
+
+        }
+        public int DeleteCategory(int ID)
+        {
+            return Catdb.DeleteCategory(ID);
+        }
     }
 }
+

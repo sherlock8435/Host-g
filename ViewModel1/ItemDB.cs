@@ -14,8 +14,7 @@ namespace ViewModel1
 
         private Item CreateModel(Item i)
         {
-
-            i.ItemID = (int)reader["CartID"];
+            i.ItemID = int.Parse(reader["ItemID"].ToString());
             i.Name = reader["Name"].ToString();
             i.Price = int.Parse(reader["Price"].ToString());
             i.Description = reader["Description"].ToString();
@@ -115,8 +114,11 @@ namespace ViewModel1
         public int AddItem(Item item)
         {
 
-            string insertSql = string.Format("insert into ItemsTbl" + "(CartID,Name,Price,ItemImg,Quantity,Description,Category)" + "values({0},'{1}','{2}','{3}',{4},'{5}','{6}',{7})", item.Name, item.Price, item.Description, item.Quantity, item.ItemID, item.Category, item.ItemImg);
+            string insertSql =
+            $"INSERT INTO ItemsTbl (Name, Price, Description, Quantity, Category, ItemImg) " +
+            $"VALUES ('{item.Name}', {item.Price}, '{item.Description}', {item.Quantity}, '{item.Category}', '{item.ItemImg}')";
             return TmDB.ChangeTable(insertSql, "DB.accdb");
+
 
 
         }
@@ -131,7 +133,7 @@ namespace ViewModel1
 
         public int DeleteItem(Item item)
         {
-            string delSql = string.Format("Delete from ItemsTbl" + "where CartID=" + item.ItemID);
+            string delSql = $"Delete from ItemsTbl where ItemID = {item.ItemID}";
             return TmDB.ChangeTable(delSql, "DB.accdb");
         }
 

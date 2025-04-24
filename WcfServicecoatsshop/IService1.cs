@@ -28,6 +28,10 @@ namespace WcfServicecoatsshop
         [OperationContract]
         Item[] GetCartItems(string email);
         [OperationContract]
+        int GetTotalPrice(string email);
+        [OperationContract]
+        int AddItemToCart(string email, Item item);
+        [OperationContract]
         CityList SelectAllCities();
         [OperationContract]
         Cities SelectCityByName(string cityName);
@@ -89,6 +93,28 @@ namespace WcfServicecoatsshop
         int CountUsers();
         [OperationContract]
         MailBoxList SelectAllMsg();
+        [OperationContract]
+        MailBoxList SelectMsgByEmail(string email);
+        [OperationContract]
+        int AddMassage(MailBox m);
+        [OperationContract]
+        CategoryList SelectAllCategories();
+        [OperationContract]
+        DataTable GetCategories();
+        [OperationContract]
+
+        Category SelectCategoryByName(string categoryName);
+        [OperationContract]
+
+        int AddCategory(Category c);
+        [OperationContract]
+
+        int UpdateCategory(int ID, string name);
+        [OperationContract]
+
+        int DeleteCategory(int ID);
+
+
 
 
         // TODO: Add your service operations here

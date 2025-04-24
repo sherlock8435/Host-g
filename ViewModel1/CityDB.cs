@@ -6,7 +6,7 @@ using Model;
 
 namespace ViewModel1
 {
-    public class CityDB :DBFunctions
+    public class CityDB : DBFunctions
     {
         private CityList list = new CityList();
 
@@ -22,16 +22,14 @@ namespace ViewModel1
             try
             {
 
-                string sqlStr = "Select * From CityTbl";
+                string sqlStr = "SELECT * FROM Citytbl";
                 cmd = GenerateOleDBCommand(sqlStr, "DB.accdb");
                 conObj.Open();
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-
                     Cities c = new Cities();
                     list.Add(CreateModel(c));
-
                 }
 
             }
@@ -43,26 +41,23 @@ namespace ViewModel1
 
             }
 
-            finally { 
-            
-            if(reader != null) 
-                    reader.Close();
+            finally
+            {
 
-            if(this.conObj.State == System.Data.ConnectionState.Open)
+                reader?.Close();
+
+                if (this.conObj.State == System.Data.ConnectionState.Open)
                     this.conObj.Close();
-            
+
             }
             return list;
-
-
-
         }
 
         public Cities SelectCityByName(string cityName)
         {
 
             list = SelectAllCities();
-            Cities c = list.Find(Item=>Item.CityName == cityName);
+            Cities c = list.Find(Item => Item.CityName == cityName);
             return c;
 
 
@@ -80,7 +75,7 @@ namespace ViewModel1
         public List<Cities> OrderByName()
         {
             list = SelectAllCities();
-            return list.OrderBy(item=>item.CityName).ToList();
+            return list.OrderBy(item => item.CityName).ToList();
 
         }
 

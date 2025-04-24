@@ -112,6 +112,52 @@ namespace ViewModel1
             return items;
         }
 
+        public int GetTotalPrice(string email)
+        {
+            Item[] items = GetCartItems(email);
+            int total = 0;
+            foreach (Item item in items)
+            {
+                total += item.Price * item.Quantity;
+            }
+            return total;
+        }
+
+        public int AddItemToCart(string email, Item item)
+        {
+            Cart cart = SelectCartByEmail(email);
+            if (cart == null)
+            {
+                cart = new Cart
+                {
+                    UserEmail = email,
+                    ItemCount = "1",
+                    Items = item.ItemID.ToString()
+                };
+                return AddToCart(cart);
+            }
+            else
+            {
+                string[] items = cart.Items.Split(',');
+                string[] counts = cart.ItemCount.Split(',');
+                List<string> itemList = items.ToList();
+                List<string> countList = counts.ToList();
+                if (itemList.Contains(item.ItemID.ToString()))
+                {
+                    int index = itemList.IndexOf(item.ItemID.ToString());
+                    countList[index] = (int.Parse(countList[index]) + 1).ToString();
+                }
+                else
+                {
+                    itemList.Add(item.ItemID.ToString());
+                    countList.Add("1");
+                }
+                cart.Items = string.Join(",", itemList);
+                cart.ItemCount = string.Join(",", countList);
+                return UpdateCart(cart);
+            }
+        }
+
     }
 
 }

@@ -11,16 +11,5 @@ namespace Model
     {
         public CityList() { }
         public CityList(IEnumerable<Cities> list) : base(list) { }
-
-
-
-        public List<Cities> OrderByCityName()
-        {
-
-            if (Count > 0)
-
-                return this.OrderBy(item => item.CityName).ToList();
-            return null;
-        }
     }
 }

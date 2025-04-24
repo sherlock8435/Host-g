@@ -10,16 +10,15 @@ namespace ViewModel
 {
     public class Mailboxdb : DBFunctions
     {
-        private MailBoxList list = new MailBoxList();
+        private readonly MailBoxList list = new MailBoxList();
+        
         private MailBox CreateModel(MailBox m)
         {
             m.SenderEmail = reader["SenderEmail"].ToString();
             m.msgDate = reader["msgDate"].ToString();
             m.msgRead = (bool)reader["msgRead"];
             m.msgSubject = reader["msgSubject"].ToString();
-            m.RecieverEmail = reader["RecieverEmail"].ToString();
-            m.SenderFName = reader["SenderFName"].ToString();
-            m.SenderLName = reader["SenderLName"].ToString();
+            m.SenderName = reader["SenderName"].ToString();
             return m;
 
         }
@@ -35,7 +34,7 @@ namespace ViewModel
             try
             {
 
-                cmd = GenerateOleDBCommand(sqlStr, "GardeningDB.accdb");
+                cmd = GenerateOleDBCommand(sqlStr, "DB.accdb");
                 conObj.Open();
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -50,12 +49,24 @@ namespace ViewModel
             }
             finally
             {
-                if (reader != null)
-                    reader.Close();
+                reader?.Close();
                 if (this.conObj.State == System.Data.ConnectionState.Open)
                     this.conObj.Close();
             }
             return list;
+        }
+
+        public MailBoxList SelectMsgByEmail(string email)
+        {
+            string sqlStr = $"SELECT * FROM MailBoxtbl where SenderEmail='{email}'";
+            return SelectAll(sqlStr);
+        }
+
+        public int AddMassage(MailBox m)
+        {
+            string insertSql = string.Format($"INSERT INTO MailBoxtbl(SenderEmail, msgDate, SenderName, msgSubject, msgBody, msgRead) " +
+                $"VALUES('{m.SenderEmail}', '{m.msgDate}', '{m.SenderName}', '{m.msgSubject}', '{m.msgBody}', {m.msgRead})");
+            return ChangeTable(insertSql, "DB.accdb");
         }
     }
 }

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CartDB.cs" />
+    <Compile Include="CategoryDB.cs" />
     <Compile Include="CityDB.cs" />
     <Compile Include="DBFunctions.cs" />
     <Compile Include="ItemDB.cs" />
@@ -67,6 +68,7 @@
     <Content Include="App_Data\DB.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="App_Data\XMLloginFile.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

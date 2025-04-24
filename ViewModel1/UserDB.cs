@@ -23,14 +23,14 @@ namespace ViewModel1
 			CityDB c = new CityDB();
 			usr.Fname = reader["Fname"].ToString();
 			usr.Lname = reader["LName"].ToString();
-			usr.UserPass = reader["userPass"].ToString();
+			usr.UserPass = reader["UserPass"].ToString();
 			usr.Utelnum = reader["Utelnum"].ToString();
-			int CityID = (int)reader["City"];
+			int CityID = (int)reader["CityID"];
 			usr.UserEmail = reader["userEmail"].ToString();
-			usr.Ubirthday = reader["birthDay"].ToString();
-			usr.Ugender = reader["Gender"].ToString();
-			usr.Uquestion = reader["Question"].ToString();
-			usr.Uanswer = reader["Answer"].ToString();
+			usr.Ubirthday = reader["UbirthDay"].ToString();
+			usr.Ugender = reader["Ugender"].ToString();
+			usr.Uquestion = reader["Uquestion"].ToString();
+			usr.Uanswer = reader["Uanswer"].ToString();
 			usr.CartID = reader["CartID"].ToString();
 
             return usr;

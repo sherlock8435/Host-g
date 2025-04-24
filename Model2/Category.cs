@@ -10,7 +10,7 @@ namespace Model
     {
         public string CategoryName { get; set; }
 
-        public string CategoryImg { get; set; }
+        public string CategoryID { get; set; }
 
 
     }

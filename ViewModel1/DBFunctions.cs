@@ -132,7 +132,7 @@ namespace ViewModel1
 
             string strPass = "", id_ = "";
             DataSet ds = new DataSet();
-            string strPath = path() + "\\App_Data\\XMLloginFile.xml";
+            string strPath = path() + "1" + "\\App_Data\\XMLloginFile.xml";
 
             ds.ReadXml(strPath);
             DataTable dt = ds.Tables[0];
@@ -148,22 +148,7 @@ namespace ViewModel1
                     }
 
             return false;
-
-
-
-
-
         }
-
-
-
-
-
-
-
-
-
-
     }
 }
 
