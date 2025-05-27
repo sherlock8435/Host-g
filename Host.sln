@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model2\Model.cspro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel1", "ViewModel1\ViewModel1.csproj", "{CC9C5C9E-A72E-46F1-87FB-36A2BD8E98F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfServicecoatsshop", "WcfServicecoatsshop\WcfServicecoatsshop.csproj", "{B4C80378-C3A7-46C2-A120-DDD668CF9D95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfService", "WcfServicecoatsshop\WcfService.csproj", "{B4C80378-C3A7-46C2-A120-DDD668CF9D95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

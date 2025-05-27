@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="WcfService.Service1">
+    <Position X="12.5" Y="5.25" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AKgqQABgiAYAgEAAgQIAANAagZRACsgoAQALglFAICg=</HashCode>
+      <FileName>Service1.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="WcfService.IService1">
+    <Position X="10.25" Y="5.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAIQAAgiAYAgEAAgQIAANAagZRACsgoAAALglFAICg=</HashCode>
+      <FileName>IService1.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

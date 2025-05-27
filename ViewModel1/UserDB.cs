@@ -39,9 +39,9 @@ namespace ViewModel1
 		public int AddUser(User user)
 		{
 			string updateSql = string.Format("INSERT INTO Usertbl " +
-                "(Uanswer, Uquestion, Utelnum, Ubirthday, Ugender, CityID, UserPass, Lname, Fname, UserEmail, CartID)" +
+                "(Uanswer, Uquestion, Utelnum, Ubirthday, Ugender, CityID, UserPass, Lname, Fname, UserEmail)" +
 				 $" VALUES ('{user.Uanswer}', '{user.Uquestion}', '{user.Utelnum}', '{user.Ubirthday:yyyy-MM-dd}', '{user.Ugender}', {user.CityID}, " +
-				 $"'{user.UserPass}', '{user.Lname}', '{user.Fname}', '{user.UserEmail}', {user.CartID})");
+				 $"'{user.UserPass}', '{user.Lname}', '{user.Fname}', '{user.UserEmail}')");
 
 			return dbf.ChangeTable(updateSql, "DB.accdb");
 
@@ -191,7 +191,7 @@ namespace ViewModel1
 		public int UpdateUserProfile(User usr)
 		{
 
-			string updateSql = $"update Usertbl SET UserPass='{usr.UserPass}', FirstName='{usr.Fname}',LastName='{usr.Lname}',telephone='{usr.Utelnum}',Birthday='{usr.Ubirthday}' where UserEmail='{usr.UserEmail}";
+			string updateSql = $"update Usertbl SET UserPass='{usr.UserPass}', FirstName='{usr.Fname}',LastName='{usr.Lname}',telephone='{usr.Utelnum}',Birthday='{usr.Ubirthday}',CartID='{usr.CartID}' where UserEmail='{usr.UserEmail}";
 
 			return dbf.ChangeTable(updateSql, "DB.accdb");
 		}

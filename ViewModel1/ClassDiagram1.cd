@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ViewModel1.CartDB">
+    <Position X="6.75" Y="6.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAEAAEAAAAAAAFAAggAAAIAAAAAIgABAACA=</HashCode>
+      <FileName>CartDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel1.CategoryDB">
+    <Position X="9" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAYAAAAAAAAAAAAAAwAAAAAAAQAAAEAAIAg=</HashCode>
+      <FileName>CategoryDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel1.CityDB">
+    <Position X="14" Y="6.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAApAAAAAAAAACAgAAAAA=</HashCode>
+      <FileName>CityDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel1.DBFunctions">
+    <Position X="11.5" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAICAAAAAAEQAAAACAAAAAAAAAAAAQAQAQAAQAAA=</HashCode>
+      <FileName>DBFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel1.ItemDB">
+    <Position X="11.5" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAIQgCACAAAAAAAAQAAAAAQggAAAggAIAAAAAEAAAA=</HashCode>
+      <FileName>ItemDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel1.OrdersDB">
+    <Position X="16.25" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAhgAAQAAAAAAAAAAAAAgAAAEAAAAAAAAAAACA=</HashCode>
+      <FileName>OrdersDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel1.UserDB">
+    <Position X="4.25" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAQgAAAgAIAAIAKAhRAAAAgBAABAAAAACA=</HashCode>
+      <FileName>UserDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.Mailboxdb">
+    <Position X="18.75" Y="6.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAACAAAAAAAAAAAAAAAgAACAAIAAAAABAAAAA=</HashCode>
+      <FileName>Mailboxdb.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -118,9 +118,6 @@ namespace ViewModel1
             $"INSERT INTO ItemsTbl (Name, Price, Description, Quantity, Category, ItemImg) " +
             $"VALUES ('{item.Name}', {item.Price}, '{item.Description}', {item.Quantity}, '{item.Category}', '{item.ItemImg}')";
             return TmDB.ChangeTable(insertSql, "DB.accdb");
-
-
-
         }
 
         public int UpdateItem(Item item)

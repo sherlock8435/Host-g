@@ -12,8 +12,8 @@ namespace ViewModel1
 
         private Cities CreateModel(Cities c)
         {
-            c.Id = (int)reader["id"];
-            c.CityName = reader["cityName"].ToString();
+            c.Id = (int)reader["cityID"];
+            c.CityName = reader["cityname"].ToString();
             return c;
         }
 
@@ -55,12 +55,9 @@ namespace ViewModel1
 
         public Cities SelectCityByName(string cityName)
         {
-
             list = SelectAllCities();
             Cities c = list.Find(Item => Item.CityName == cityName);
             return c;
-
-
         }
 
         public Cities SelectCityById(int id)

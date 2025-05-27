@@ -26,7 +26,6 @@ namespace ViewModel1
             };
             return c;
         }
-
         public int AddToCart(Cart c)
         {
             string sqlStr = $"Insert into CartTbl (ItemCount,UserEmail,Items) values ('{c.ItemCount}','{c.UserEmail}','{c.Items}')";
@@ -43,6 +42,28 @@ namespace ViewModel1
             string sqlStr = $"Delete from CartTbl where CartID = {c.CartID}";
             return CaDB.ChangeTable(sqlStr, "DB.accdb");
         }
+
+
+        public int CreatCrat()
+        {
+            string sqlStr = $"SELECT * FROM CartTbl ORDER BY CartID";
+            DataTable dt = Select(sqlStr, "DB.accdb");
+            int max = int.MinValue;
+            foreach (DataRow row in dt.Rows)
+            {
+                int existingId = int.Parse(row["CartID"].ToString());
+                if (existingId > max)
+                {
+                    max = existingId;
+                }
+            }
+
+
+            string sql = $"INSERT INTO CartTbl (UserEmail, Items, ItemCount, CartID) VALUES ('placeholder', '', '', {max})";
+            return ChangeTable(sql, "DB.accdb");
+        }
+
+
 
         public CartList SelectAllCarts()
         {
@@ -142,6 +163,8 @@ namespace ViewModel1
                 string[] counts = cart.ItemCount.Split(',');
                 List<string> itemList = items.ToList();
                 List<string> countList = counts.ToList();
+
+
                 if (itemList.Contains(item.ItemID.ToString()))
                 {
                     int index = itemList.IndexOf(item.ItemID.ToString());
@@ -152,10 +175,57 @@ namespace ViewModel1
                     itemList.Add(item.ItemID.ToString());
                     countList.Add("1");
                 }
+
                 cart.Items = string.Join(",", itemList);
                 cart.ItemCount = string.Join(",", countList);
+
+                //to ensure no leading commas
+                if (cart.Items.StartsWith(","))
+                {
+                    cart.Items = cart.Items.Substring(1);
+                }
+                if (cart.ItemCount.StartsWith(","))
+                {
+                    cart.ItemCount = cart.ItemCount.Substring(1);
+                }
                 return UpdateCart(cart);
             }
+        }
+        public Cart SelectPlaceholderCart(string email)
+        {
+            Cart c = new Cart();
+
+            string sqlStr = $"SELECT * FROM CartTbl ORDER BY CartID";
+            DataTable dt = Select(sqlStr, "DB.accdb");
+            int max = int.MinValue;
+            foreach (DataRow row in dt.Rows)
+            {
+                int existingId = int.Parse(row["CartID"].ToString());
+                if (existingId > max)
+                {
+                    max = existingId;
+                }
+            }
+
+
+            string sqlStr = $"Select * From CartTbl where UserEmail = '{email}'";
+            DataTable dt = Select(sqlStr, "DB.accdb");
+            if (dt.Rows.Count > 0)
+            {
+                Cart c = new Cart
+                {
+                    CartID = (int)dt.Rows[0]["CartID"],
+                    ItemCount = dt.Rows[0]["ItemCount"].ToString(),
+                    UserEmail = dt.Rows[0]["UserEmail"].ToString(),
+                    Items = dt.Rows[0]["Items"].ToString()
+                };
+                return c;
+            }
+
+            string sql = $"INSERT INTO CartTbl (UserEmail, Items, ItemCount, CartID) VALUES ('placeholder', '', '', {max})";
+            ChangeTable(sql, "DB.accdb");
+
+            return c;
         }
 
     }

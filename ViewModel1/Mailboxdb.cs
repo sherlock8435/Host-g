@@ -18,7 +18,8 @@ namespace ViewModel
             m.msgDate = reader["msgDate"].ToString();
             m.msgRead = (bool)reader["msgRead"];
             m.msgSubject = reader["msgSubject"].ToString();
-            m.SenderName = reader["SenderName"].ToString();
+            m.SenderName = reader["Sendername"].ToString();
+            m.msgBody = reader["msgBody"].ToString();
             return m;
 
         }

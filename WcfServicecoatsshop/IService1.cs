@@ -8,7 +8,7 @@ using System.Text;
 using Model;
 using ViewModel1;
 
-namespace WcfServicecoatsshop
+namespace WcfService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
@@ -21,6 +21,8 @@ namespace WcfServicecoatsshop
         int UpdateCart(Cart c);
         [OperationContract]
         int DeleteCart(Cart c);
+        [OperationContract]
+        int CreatCrat();
         [OperationContract]
         CartList SelectAllCarts();
         [OperationContract]
@@ -102,18 +104,15 @@ namespace WcfServicecoatsshop
         [OperationContract]
         DataTable GetCategories();
         [OperationContract]
-
         Category SelectCategoryByName(string categoryName);
         [OperationContract]
-
         int AddCategory(Category c);
         [OperationContract]
-
         int UpdateCategory(int ID, string name);
         [OperationContract]
-
         int DeleteCategory(int ID);
-
+        [OperationContract]
+        string UploadFile(byte[] fileBytes, string fileName);
 
 
 

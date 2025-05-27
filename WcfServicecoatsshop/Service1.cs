@@ -1,16 +1,17 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using System.Xml.Linq;
-using Model;
 using ViewModel;
 using ViewModel1;
 
-namespace WcfServicecoatsshop
+namespace WcfService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class Service1 : IService1
@@ -33,6 +34,10 @@ namespace WcfServicecoatsshop
         public int DeleteCart(Cart c)
         {
             return CartDB.DeleteCart(c);
+        }
+        public int CreatCrat()
+        {
+            return CartDB.CreatCrat();
         }
         public CartList SelectAllCarts()
         {
@@ -216,12 +221,40 @@ namespace WcfServicecoatsshop
         }
         public int UpdateCategory(int ID, string name)
         {
-            return Catdb.UpdateCategory(ID,name);
+            return Catdb.UpdateCategory(ID, name);
 
         }
         public int DeleteCategory(int ID)
         {
             return Catdb.DeleteCategory(ID);
+        }
+        public string UploadFile(byte[] fileBytes, string fileName)
+        {
+            // Path to public images folder (one level up from /bin)
+            string destinationFolder = "C:\\Users\\35the\\source\\repos\\finle_store\\gym_equipment_store\\resources\\products_images";
+
+            if (!Directory.Exists(destinationFolder))
+            {
+                Directory.CreateDirectory(destinationFolder);
+            }
+
+            string fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
+            string extension = Path.GetExtension(fileName);
+            string newFileName = fileName;
+            int counter = 1;
+
+            // Keep incrementing counter until we find a filename that doesn't exist
+            while (File.Exists(Path.Combine(destinationFolder, newFileName)))
+            {
+                newFileName = $"{fileNameWithoutExt}_ext_{counter}{extension}";
+                counter++;
+            }
+
+            string filePath = Path.Combine(destinationFolder, newFileName);
+            File.WriteAllBytes(filePath, fileBytes);
+
+            // Return a public URL based on localhost
+            return $"http://localhost:51971/resources/products_images/{newFileName}";
         }
     }
 }
