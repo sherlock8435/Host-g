@@ -191,10 +191,9 @@ namespace ViewModel1
                 return UpdateCart(cart);
             }
         }
-        public Cart SelectPlaceholderCart(string email)
-        {
-            Cart c = new Cart();
 
+        public int FindUniqeID()
+        {
             string sqlStr = $"SELECT * FROM CartTbl ORDER BY CartID";
             DataTable dt = Select(sqlStr, "DB.accdb");
             int max = int.MinValue;
@@ -206,9 +205,13 @@ namespace ViewModel1
                     max = existingId;
                 }
             }
+            return max + 1; // Return the next unique ID
+        }
+        public Cart SelectPlaceholderCart()
+        {
+            int max = FindUniqeID();
 
-
-            string sqlStr = $"Select * From CartTbl where UserEmail = '{email}'";
+            string sqlStr = $"Select * From CartTbl where UserEmail = 'placeholder'";
             DataTable dt = Select(sqlStr, "DB.accdb");
             if (dt.Rows.Count > 0)
             {

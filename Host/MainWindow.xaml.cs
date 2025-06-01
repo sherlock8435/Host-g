@@ -14,8 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-
+using ViewModel1;
+using Model;
 
 namespace Host
 {
@@ -27,8 +27,15 @@ namespace Host
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Cart cart;
+            CartDB cartDB = new CartDB();
+            cart = cartDB.SelectCartByEmail("placeholder");
+            lbl.Text = cart.CartID.ToString();
+            
+        }
     }
 }

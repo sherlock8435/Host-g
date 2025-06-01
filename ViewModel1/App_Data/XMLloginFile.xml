@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <adminlist>
 	<admin>
-		<name>admin</name>
-		<Password>admin</Password>
+		<name>alice</name>
+		<Password>secure123</Password>
 	</admin>
 	<admin>
-		<name>user</name>
-		<Password>user</Password>
+		<name>bob</name>
+		<Password>qwerty456</Password>
 	</admin>
 	<admin>
-		<name>test</name>
-		<Password>test</Password>
+		<name>charlie</name>
+		<Password>pass789</Password>
 	</admin>
 </adminlist>

@@ -25,13 +25,18 @@ namespace ViewModel1
             return cmd;
         }
 
-        private string path()
+        private string Path()
         {
             string currentDir = Environment.CurrentDirectory;
+
             string[] dirStr = currentDir.Split('\\');
+
             int index = dirStr.Length - 3;
+
             dirStr[index] = "ViewModel";
+
             Array.Resize(ref dirStr, index + 1);
+
             string pathStr = String.Join("\\", dirStr);
             return pathStr;
         }
@@ -42,10 +47,10 @@ namespace ViewModel1
             {
 
                 //if (dbFileName.Contains(".mdb"))
-                //    conObj.ConnectionString = "Provider=Microsoft.jet.OLEDB.4.0;Data Source=" + path() + "\\App_Data\\" + dbFileName;
+                //    conObj.ConnectionString = "Provider=Microsoft.jet.OLEDB.4.0;Data Source=" + Path() + "\\App_Data\\" + dbFileName;
 
                 //else
-                conObj.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + path() + "1" + "\\App_Data\\" + dbFileName;
+                conObj.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Path() + "1" + "\\App_Data\\" + dbFileName;
 
                 conObj.Open();
 
@@ -130,9 +135,9 @@ namespace ViewModel1
         public bool CheckAdmin(string Email_, string Password_)
         {
 
-            string strPass = "", id_ = "";
+            string strPass , id_;
             DataSet ds = new DataSet();
-            string strPath = path() + "1" + "\\App_Data\\XMLloginFile.xml";
+            string strPath = Path() + "1" + "\\App_Data\\XMLloginFile.xml";
 
             ds.ReadXml(strPath);
             DataTable dt = ds.Tables[0];

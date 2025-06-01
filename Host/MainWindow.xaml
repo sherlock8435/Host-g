@@ -15,6 +15,19 @@
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Row="1"/>
-        <Label x:Name="label" Width="100" Height="100" />
+        <Grid Grid.Row="0" Grid.Column="0">
+            <TextBlock x:Name="lbl" Text="" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       FontSize="24" 
+                       FontWeight="Bold"/>
+            <Button Content="Click Me" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Bottom" 
+                    Margin="0,0,0,20"
+                    Width="100"
+                    Click="Button_Click"/>
+        </Grid>
     </Grid>
+
 </Window>
